@@ -1,0 +1,61 @@
+package projeto;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		List<Integer> firstval = new ArrayList<Integer>();
+
+		System.out.println("Quantos números vc quer na sua lista?");
+		int numvallist = scan.nextInt();
+		for(int i = 0; i < numvallist; i++) {
+			System.out.println("insira o valor que subsidiará o índice "+i);
+			firstval.add(scan.nextInt());
+		}
+		System.out.println("Você quer em ordem crescente(0) ou decrescente(1)?");
+		int answer = scan.nextInt();
+		Comparator<Integer> comparator = null;
+		switch(answer) {
+		case 0:
+			comparator = new Comparator<Integer>() {
+				public int compare(Integer o1, Integer o2) {
+					if(o1 < o2) {
+						return -1;
+					}
+					if(o1 > o2) {
+						return +1;
+					}
+					return 0;
+				}
+			};
+			break;
+		case 1:
+			comparator = new Comparator<Integer>() {
+				public int compare(Integer o1, Integer o2) {
+					if(o1 < o2) {
+						return +1;
+					}
+					if(o1 > o2) {
+						return -1;
+					}
+					return 0;
+				}
+			};
+			break;
+		}
+		Collections.sort(firstval, comparator);
+		System.out.println("A lista organizada é: ");
+		for(int i = 0; i < firstval.size(); i++) {
+			System.out.println(firstval.get(i));
+		}
+	}
+
+}
